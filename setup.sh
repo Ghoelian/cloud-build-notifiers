@@ -73,6 +73,7 @@ main() {
 
   NOTIFIER_TYPE="$1"
   SOURCE_CONFIG_PATH="$2"
+  NOTIFIER_SUFFIX="$3"
 
   # Check that the user is using a supported notifier type in the correct
   # directory.
@@ -124,8 +125,8 @@ main() {
   SOURCE_TEMPLATE_BASENAME=$(basename "${SOURCE_TEMPLATE_PATH}")
   DESTINATION_TEMPLATE_PATH="${DESTINATION_BUCKET_URI}/${SOURCE_TEMPLATE_BASENAME}"
   IMAGE_PATH="us-east1-docker.pkg.dev/gcb-release/cloud-build-notifiers/${NOTIFIER_TYPE}:latest"
-  SERVICE_NAME="${NOTIFIER_TYPE}-notifier"
-  SUBSCRIPTION_NAME="${NOTIFIER_TYPE}-subscription"
+  SERVICE_NAME="${NOTIFIER_TYPE}-${NOTIFIER_SUFFIX}-notifier"
+  SUBSCRIPTION_NAME="${NOTIFIER_TYPE}-${NOTIFIER_SUFFIX}-subscription"
   INVOKER_SA="cloud-run-pubsub-invoker@${PROJECT_ID}.iam.gserviceaccount.com"
   PUBSUB_SA="service-${PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com"
 
